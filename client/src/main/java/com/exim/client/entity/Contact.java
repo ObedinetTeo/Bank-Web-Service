@@ -2,6 +2,8 @@ package com.exim.client.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -9,7 +11,7 @@ import jakarta.persistence.Table;
 @Table(name = "contacte", schema = "exim")
 public class Contact {
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_contact", length = 10)
     private Long idContact;
 
@@ -32,10 +34,6 @@ public class Contact {
     // --- Getters and Setters ---
     public Long getIdContact() {
         return this.idContact;
-    }
-
-    public void setIdContact(Long idContact) {
-        this.idContact = idContact;
     }
 
     public Long getIdClient() {

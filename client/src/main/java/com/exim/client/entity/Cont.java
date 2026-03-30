@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
@@ -14,7 +16,7 @@ import com.exim.client.model.TipCont;
 @Table(name = "conturi", schema = "exim")
 public class Cont {
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cont", length = 10)
     private Long idCont;
 
@@ -41,10 +43,6 @@ public class Cont {
     // --- Getters and Setters ---
     public Long getIdCont() {
         return this.idCont;
-    }
-
-    public void setIdCont(Long idCont) {
-        this.idCont = idCont;
     }
 
     public Long getIdClient() {

@@ -6,6 +6,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -13,15 +15,12 @@ import jakarta.persistence.Table;
 @Table(name = "adrese", schema = "exim")
 public class Adresa {
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_adresa", length = 10)
     private Long idAdresa;
 
     @Column(name = "id_client", nullable = false, unique = true, length = 10)
     private Long idClient;
-
-    // @Column(name = "tara", nullable = false, length = 50)
-    // private String tara;
 
     @Column(name = "oras", nullable = false, length = 50)
     private String oras;
@@ -39,6 +38,9 @@ public class Adresa {
     @Column(name = "status", nullable = false)
     private Boolean status;
 
+    @Column(name = "tara", nullable = false, length = 50)
+    private String tara;
+
     // --- Default constructor ---
     public Adresa() {
     }
@@ -46,10 +48,6 @@ public class Adresa {
     // --- Getters and Setters ---
     public Long getIdAdresa() {
         return this.idAdresa;
-    }
-
-    public void setIdAdresa(Long idAdresa) {
-        this.idAdresa = idAdresa;
     }
 
     public Long getIdClient() {
@@ -98,5 +96,13 @@ public class Adresa {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public String getTara() {
+        return this.tara;
+    }
+
+    public void setTara(String tara) {
+        this.tara = tara;
     }
 }
