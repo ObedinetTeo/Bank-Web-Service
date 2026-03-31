@@ -15,5 +15,7 @@ public interface DetaliiClientRepository extends JpaRepository<DetaliiClientView
     Optional<DetaliiClientView> findByCnp(String cnp);
     Optional<DetaliiClientView> findByActId(String actId);
     List<DetaliiClientView> findByNumeContainingIgnoreCaseOrPrenumeContainingIgnoreCase(String nume, String prenume);
+    List<DetaliiClientView> findByNumeContainingIgnoreCase(String nume);
+
     List<DetaliiClientView> findByTara(String tara);
 }

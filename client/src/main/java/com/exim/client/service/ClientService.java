@@ -30,14 +30,21 @@ public class ClientService {
         return mapToResponse(client);
     }
 
-    public List<ClientResponse> searchByName(String nume, String prenume) {
-        return clientRepository.findByNumeContainingIgnoreCaseOrPrenumeContainingIgnoreCase(nume, prenume)
+    public List<ClientResponse> searchByName(String nume) {
+        return clientRepository.findByNumeContainingIgnoreCase(nume)
                 .stream()
                 .map(this::mapToResponse)
                 .toList();
     }
 
-    public DetaliiClientView obtineProfilComplet(String codClient) {
+    public List<ClientResponse> searchByStatus(Boolean status) {
+		return clientRepository.findByStatus(status)
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+	}
+
+    public DetaliiClientView getCompleteProfile(String codClient) {
         return detaliiClientRepository.findByCodClient(codClient)
                 .orElseThrow(() -> new RuntimeException("Eroare: Nu am putut gasi detaliile pentru clientul " + codClient));
     }
@@ -53,9 +60,5 @@ public class ClientService {
         return response;
     }
 
-    public ClientResponse getById(Integer id) {
-        Client client = clientRepository.findAllById(id.longValue())
-                .orElseThrow(() -> new ResourceNotFoundException("Clientul nu a fost gasit"));
-        return mapToResponse(client);
-    }
+
 }

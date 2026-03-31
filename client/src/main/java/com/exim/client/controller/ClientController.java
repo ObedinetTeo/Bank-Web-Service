@@ -1,14 +1,14 @@
 package com.exim.client.controller;
 
 import com.exim.client.dto.ClientResponse;
-import com.exim.client.dto.UpdateClientRequest;
+import com.exim.client.entity.DetaliiClientView;
 import com.exim.client.service.ClientService;
-import jakarta.validation.Valid;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/clienti")
@@ -21,27 +21,33 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping("/{id}")
-    public ClientResponse getById(@PathVariable Integer id) {
-        return clientService.getById(id);
-    }
-
     @GetMapping("/cod/{codClient}")
     public ClientResponse getByCodClient(@PathVariable String codClient) {
         return clientService.getByCodClient(codClient);
     }
+    
 
-    // @GetMapping
-    // public List<ClientResponse> search(
-    //         @RequestParam(required = false) String name,
-    //         @RequestParam(required = false) String status) {
+    @GetMapping("/profil/{codClient}")
+    public DetaliiClientView getCompleteProfile(@PathVariable String codClient) {
+        return clientService.getCompleteProfile(codClient);
+    }
 
-    //     if (name != null && !name.isBlank()) {
-    //         return clientService.searchByName(name);
-    //     }
-    //     if (status != null && !status.isBlank()) {
-    //         return clientService.searchByStatus(status);
-    //     }
-    //     throw new IllegalArgumentException("Trimite parametrul name sau status");
-    // }
+    @GetMapping("/{nume}")
+    public List<ClientResponse> searchByName(@PathVariable String nume) {
+        return clientService.searchByName(nume);
+    }
+
+    @GetMapping
+    public List<ClientResponse> search(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Boolean status) {
+
+        if (name != null && !name.isBlank()) {
+            return clientService.searchByName(name);
+        }
+        if (status != null) {
+            return clientService.searchByStatus(status);
+        }
+        throw new IllegalArgumentException("Trimite parametrul name sau status");
+    }
 }
