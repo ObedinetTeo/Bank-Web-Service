@@ -10,4 +10,5 @@ import com.exim.client.entity.SituatieConturiView;
 @Repository
 public interface SituatieConturiRepository extends JpaRepository<SituatieConturiView, Long>{
     List<SituatieConturiView> findByCodClient(String codClient);
+    List<SituatieConturiView> findByTipContDescriereIgnoreCase(String tipContDescriere);
 }

@@ -29,7 +29,7 @@ public class Adresa {
     private String strada;
 
     @Column(name = "nr", nullable = false, length = 10)
-    private String numar;
+    private Integer numar;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tip_adresa", nullable = false, length = 100)
@@ -74,11 +74,11 @@ public class Adresa {
         this.strada = strada;
     }
 
-    public String getNumar() {
+    public Integer getNumar() {
         return this.numar;
     }
 
-    public void setNumar(String numar) {
+    public void setNumar(Integer numar) {
         this.numar = numar;
     }
 
