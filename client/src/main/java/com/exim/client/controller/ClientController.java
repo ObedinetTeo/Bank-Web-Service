@@ -1,7 +1,12 @@
 package com.exim.client.controller;
 
 import com.exim.client.dto.ClientResponse;
+import com.exim.client.dto.UpdateClientRequest;
+import com.exim.client.dto.UpdateAdresaRequest;
+import com.exim.client.dto.UpdateContactRequest;
 import com.exim.client.entity.DetaliiClientView;
+import com.exim.client.entity.Adresa;
+import com.exim.client.entity.Contact;
 import com.exim.client.service.ClientService;
 import com.exim.client.dto.ClientRequest;
 import com.exim.client.entity.Client;
@@ -71,6 +76,30 @@ public class ClientController {
     public ResponseEntity<Client> addClient(@RequestBody ClientRequest client){
         Client savedClient = clientService.createNewClient(client);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedClient);
+    }
+
+    @DeleteMapping("/delete/{codClient}")
+    public ResponseEntity<String> deleteClientLogical(@PathVariable String codClient) {
+        clientService.deleteClientLogical(codClient);
+        return ResponseEntity.ok("Clientul " + codClient + " a fost sters logic cu succes");
+    }
+
+    @PutMapping("/update/{codClient}")
+    public ResponseEntity<ClientResponse> updateClient(@PathVariable String codClient, @RequestBody UpdateClientRequest request) {
+        ClientResponse response = clientService.updateClient(codClient, request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/adresa/update/{codClient}/{tipAdresa}")
+    public ResponseEntity<Adresa> updateAdresa(@PathVariable String codClient, @PathVariable String tipAdresa, @RequestBody UpdateAdresaRequest request) {
+        Adresa adresa = clientService.updateAdresa(codClient, tipAdresa, request);
+        return ResponseEntity.ok(adresa);
+    }
+
+    @PutMapping("/contact/update/{codClient}")
+    public ResponseEntity<Contact> updateContact(@PathVariable String codClient, @RequestBody UpdateContactRequest request) {
+        Contact contact = clientService.updateContact(codClient, request);
+        return ResponseEntity.ok(contact);
     }
     
 }

@@ -59,6 +59,28 @@ public class ContService {
         return contRepository.save(contNou);
     }
 
+    @Transactional
+    public ContResponse inchidereCont(String codClient, String tipCont){
+        Client client = clientRepository.findByCodClient(codClient)
+                .orElseThrow(() -> new ResourceNotFoundException("Clientul nu a fost gasit"));
+
+        List<Cont> conts = contRepository.findByIdClientAndTipCont(client.getIdClient(), TipCont.valueOf(tipCont.toUpperCase()));
+        if (conts.isEmpty()) {
+            throw new ResourceNotFoundException("Contul nu a fost gasit");
+        }
+        Cont cont = conts.get(0);
+
+        cont.setStareCont(false);
+        cont.setDataInchidere(LocalDate.now());
+        Cont updatedCont = contRepository.save(cont);
+
+        return mapToResponse(situatieConturiRepository.findByCodClient(codClient)
+                .stream()
+                .filter(c -> c.getTipContDescriere().equalsIgnoreCase(tipCont))
+                .findFirst()
+                .orElseThrow(() -> new ResourceNotFoundException("Situatia contului nu a fost gasita")));
+    }
+
     private ContResponse mapToResponse(SituatieConturiView view){
         ContResponse response = new ContResponse();
         response.setCodClient(view.getCodClient());

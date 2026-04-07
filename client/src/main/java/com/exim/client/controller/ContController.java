@@ -6,14 +6,18 @@ import com.exim.client.dto.DeschidereContRequest;
 import com.exim.client.entity.Cont;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
+
 
 
 
@@ -41,12 +45,10 @@ public class ContController {
     public Cont openCont(@RequestBody DeschidereContRequest request) {
         return contService.deschidereCont(request);
     }
-    
-    @PostMapping("/close")
-    public Cont postMethodName(@RequestBody String entity) {
-        //TODO: process POST request
-        
-        return entity;
+
+    @PutMapping("/close/{codClient}/{tipCont}")
+    public ResponseEntity<ContResponse> inchidereCont(@PathVariable String codClient, @PathVariable String tipCont) {
+        ContResponse response = contService.inchidereCont(codClient, tipCont);
+        return ResponseEntity.ok(response);
     }
-    
 }
