@@ -87,11 +87,19 @@ public class ClientService {
     }
 
     public List<DetaliiClientView> searchByTara(String tara) {
-        return detaliiClientRepository.findByTara(tara);
+        List<DetaliiClientView> rezultate = detaliiClientRepository.findByTaraIgnoreCase(tara);
+        if (rezultate.isEmpty()) {
+            throw new ResourceNotFoundException("Nu am gasit clienti in tara: " + tara);
+        }
+        return rezultate;
     }
 
     public List<DetaliiClientView> searchByOras(String oras) {
-        return detaliiClientRepository.findByOras(oras);
+        List<DetaliiClientView> rezultate = detaliiClientRepository.findByOrasIgnoreCase(oras);
+        if (rezultate.isEmpty()) {
+            throw new ResourceNotFoundException("Nu am gasit clienti in orasul: " + oras);
+        }
+        return rezultate;
     }
 
     @Transactional

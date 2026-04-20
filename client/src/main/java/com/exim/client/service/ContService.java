@@ -51,7 +51,7 @@ public class ContService {
 
         Cont contNou = new Cont();
         contNou.setIdClient(client.getIdClient());
-        contNou.setTipCont(TipCont.valueOf(request.getTipCont().toUpperCase()));
+        contNou.setTipCont(TipCont.fromString(request.getTipCont()));
         contNou.setStareCont(true);
         contNou.setDataDeschidere(LocalDate.now());
         contNou.setDataInchidere(null);
@@ -64,19 +64,24 @@ public class ContService {
         Client client = clientRepository.findByCodClient(codClient)
                 .orElseThrow(() -> new ResourceNotFoundException("Clientul nu a fost gasit"));
 
-        List<Cont> conts = contRepository.findByIdClientAndTipCont(client.getIdClient(), TipCont.valueOf(tipCont.toUpperCase()));
+        TipCont tipContEnum = TipCont.fromString(tipCont);
+        List<Cont> conts = contRepository.findByIdClientAndTipCont(client.getIdClient(), tipContEnum);
         if (conts.isEmpty()) {
             throw new ResourceNotFoundException("Contul nu a fost gasit");
         }
         Cont cont = conts.get(0);
 
+        if (cont.getStareCont() == false) {
+            throw new IllegalStateException("Contul este deja inchis");
+        }
+
         cont.setStareCont(false);
         cont.setDataInchidere(LocalDate.now());
-        Cont updatedCont = contRepository.save(cont);
+        contRepository.save(cont);
 
         return mapToResponse(situatieConturiRepository.findByCodClient(codClient)
                 .stream()
-                .filter(c -> c.getTipContDescriere().equalsIgnoreCase(tipCont))
+                .filter(c -> c.getTipContDescriere().equalsIgnoreCase(tipContEnum.getDenumire()))
                 .findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("Situatia contului nu a fost gasita")));
     }
