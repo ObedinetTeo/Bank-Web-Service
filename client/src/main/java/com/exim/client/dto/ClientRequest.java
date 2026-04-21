@@ -1,12 +1,30 @@
 package com.exim.client.dto;
 
 public class ClientRequest {
+    @NotBlank(message = "Numele este obligatoriu!")
+    @Size(min = 2, max = 30, message = "Numele trebuie sa aiba intre 2 si 30 de caractere!")
+    @Pattern(regexp = "^[a-zA-Z\\s-]+$", message = "Numele poate contine doar litere si cratime!")
     private String nume;
+
+    @NotBlank(message = "Prenumele este obligatoriu!")
+    @Size(min = 2, max = 50, message = "Prenumele trebuie sa aiba intre 2 si 50 de caractere!")
+    @Pattern(regexp = "^[a-zA-Z\\s-]+$", message = "Prenumele poate contine doar litere si cratime!")
     private String prenume;
+
+    @Pattern(regexp = "^[0-9]{13}$", message = "CNP-ul trebuie sa aiba exact 13 cifre!")
     private String cnp;
+
+    @NotBlank(message = "Actul de identitate este obligatoriu!")
+    @Size(min = 2, max = 50, message = "Actul de identitate trebuie sa aiba intre 2 si 50 de caractere!")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Actul de identitate poate contine doar numere si litere!")
     private String actId;
 
+    @Valid
+    @NotNull(message = "Datele adresei sunt obligatorii!")
     private AdresaRequest adresa;
+
+    @Valid
+    @NotNull(message = "Datele de contact sunt obligatorii!")
     private ContactRequest contact;
 
     public String getNume() { return nume; }

@@ -1,8 +1,16 @@
 package com.exim.client.dto;
 
 public class UpdateClientRequest {
+    @NotBlank(message = "Numele este obligatoriu!")
+    @Size(min = 2, max = 30, message = "Numele trebuie sa aiba intre 2 si 30 de caractere!")
+    @Pattern(regexp = "^[a-zA-Z\\s-]+$", message = "Numele poate contine doar litere si cratime!")
     private String nume;
+
+    @NotBlank(message = "Prenumele este obligatoriu!")
+    @Size(min = 2, max = 50, message = "Prenumele trebuie sa aiba intre 2 si 50 de caractere!")
+    @Pattern(regexp = "^[a-zA-Z\\s-]+$", message = "Prenumele poate contine doar litere si cratime!")
     private String prenume;
+    
     private Boolean status;
 
     public String getNume() { return nume; }

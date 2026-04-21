@@ -1,10 +1,19 @@
 package com.exim.client.dto;
 
 public class AdresaRequest {
+    @NotBlank(message = "Tara este obligatorie!")
     private String tara;
+
+    @NotBlank(message = "Orasul este obligatoriu!")
     private String oras;
+
+    @NotBlank(message = "Strada este obligatorie!")
     private String strada;
+
+    @NotBlank(message = "Numarul este obligatoriu!")
     private Integer nr;
+
+    @NotBlank(message = "Tipul de adresa este obligatoriu!")
     private String tipAdresa;
 
     public String getTara() { return tara; }
