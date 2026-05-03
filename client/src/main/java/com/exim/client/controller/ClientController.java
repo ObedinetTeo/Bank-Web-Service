@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/api/clienti")
+@RequestMapping("/api/clients")
 public class ClientController {
 
     @Autowired
@@ -30,18 +30,18 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping("/cod/{codClient}")
+    @GetMapping("/code/{codClient}")
     public ClientResponse getByCodClient(@PathVariable String codClient) {
         return clientService.getByCodClient(codClient);
     }
     
 
-    @GetMapping("/profil/{codClient}")
+    @GetMapping("/profile/{codClient}")
     public DetaliiClientView getCompleteProfile(@PathVariable String codClient) {
         return clientService.getCompleteProfile(codClient);
     }
 
-    @GetMapping("/nume/{nume}")
+    @GetMapping("/name/{nume}")
     public List<ClientResponse> searchByName(@PathVariable String nume) {
         return clientService.searchByName(nume);
     }
@@ -58,15 +58,15 @@ public class ClientController {
         if (status != null) {
             return clientService.searchByStatus(status);
         }
-        throw new IllegalArgumentException("Trimite parametrul nume sau status");
+        throw new IllegalArgumentException("Send at least one search parameter: last name or status (true/false)!");
     }
 
-    @GetMapping("/tara/{tara}")
+    @GetMapping("/country/{tara}")
     public List<DetaliiClientView> searchByTara(@PathVariable String tara) {
         return clientService.searchByTara(tara);
     }
 
-    @GetMapping("/oras/{oras}")
+    @GetMapping("/city/{oras}")
     public List<DetaliiClientView> searchByOras(@PathVariable String oras) {
         return clientService.searchByOras(oras);
     }

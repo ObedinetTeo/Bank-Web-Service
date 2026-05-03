@@ -1,4 +1,7 @@
 package com.exim.client.dto;
+import jakarta.validation.constraints.*;
+import jakarta.validation.Valid;
+
 
 public class ClientRequest {
     @NotBlank(message = "Numele este obligatoriu!")

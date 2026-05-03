@@ -1,4 +1,5 @@
 package com.exim.client.dto;
+import jakarta.validation.constraints.*;
 
 public class AdresaRequest {
     @NotBlank(message = "Tara este obligatorie!")

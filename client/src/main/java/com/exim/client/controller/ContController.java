@@ -4,6 +4,7 @@ import com.exim.client.service.ContService;
 import com.exim.client.dto.ContResponse;
 import com.exim.client.dto.DeschidereContRequest;
 import com.exim.client.entity.Cont;
+import com.exim.client.exception.ResourceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/conturi")
+@RequestMapping("/api/accounts")
 public class ContController {
     @Autowired
     private ContService contService;
@@ -32,12 +33,22 @@ public class ContController {
 
     @GetMapping("/byCodClient/{codClient}")
     public List<ContResponse> searchByCodClient(@PathVariable String codClient) {
-        return contService.getConturiByCodClient(codClient);
+        List<ContResponse> results = contService.getConturiByCodClient(codClient);
+        if (results.isEmpty())
+        {
+            throw new ResourceNotFoundException("No active accounts were found!");
+        }
+        return results;
     }
     
     @GetMapping("/byTipCont/{tipContDescriere}")
     public List<ContResponse> searchByTipCont(@PathVariable String tipContDescriere) {
-        return contService.getConturiByTipContDescriere(tipContDescriere);
+        List<ContResponse> results = contService.getConturiByTipContDescriere(tipContDescriere);
+        if (results.isEmpty())
+        {
+            throw new ResourceNotFoundException("No active accounts were found for this account type!");
+        }
+        return results;
     }
 
     @PostMapping("/open")

@@ -1,4 +1,5 @@
 package com.exim.client.dto;
+import jakarta.validation.constraints.*;
 
 public class ContactRequest {
     @Pattern(regexp = "^[0-9]{10,15}$", message = "Numariul de telefon trebuie sa aiba inre 10 si 15 cifre!")

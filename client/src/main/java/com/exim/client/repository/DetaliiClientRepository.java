@@ -15,5 +15,5 @@ public interface DetaliiClientRepository extends JpaRepository<DetaliiClientView
     List<DetaliiClientView> findByNumeContainingIgnoreCaseOrPrenumeContainingIgnoreCase(String nume, String prenume);
     List<DetaliiClientView> findByNumeContainingIgnoreCase(String nume);
     List<DetaliiClientView> findByTaraIgnoreCase(String tara);
-    List<DetaliiClientView> findByOrasIgnoreCase(String oras);
+    List<DetaliiClientView> findByOrasContainingIgnoreCase(String oras);
 }

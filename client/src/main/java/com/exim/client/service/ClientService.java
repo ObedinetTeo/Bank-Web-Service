@@ -63,43 +63,51 @@ public class ClientService {
 
     public ClientResponse getByCodClient(String codClient) {
         Client client = clientRepository.findByCodClient(codClient)
-                .orElseThrow(() -> new ResourceNotFoundException("Clientul nu a fost gasit"));
+                .orElseThrow(() -> new ResourceNotFoundException("The client was not found!"));
         return mapToResponse(client);
     }
 
     public List<ClientResponse> searchByName(String nume) {
-        return clientRepository.findByNumeContainingIgnoreCase(nume)
+        List<ClientResponse> results =  clientRepository.findByNumeContainingIgnoreCase(nume)
                 .stream()
                 .map(this::mapToResponse)
                 .toList();
+        if (results.isEmpty()){
+            throw new ResourceNotFoundException("No client was not found!"); 
+        }
+        return results;
     }
 
     public List<ClientResponse> searchByStatus(Boolean status) {
-		return clientRepository.findByStatus(status)
+		List<ClientResponse> results = clientRepository.findByStatus(status)
                 .stream()
                 .map(this::mapToResponse)
                 .toList();
+        if (results.isEmpty()){
+            throw new ResourceNotFoundException("No client was not found!"); 
+        }
+        return results;
 	}
 
     public DetaliiClientView getCompleteProfile(String codClient) {
         return detaliiClientRepository.findByCodClient(codClient)
-                .orElseThrow(() -> new RuntimeException("Eroare: Nu am putut gasi detaliile pentru clientul " + codClient));
+                .orElseThrow(() -> new ResourceNotFoundException("The client's details were not found for codClient: " + codClient));
     }
 
     public List<DetaliiClientView> searchByTara(String tara) {
-        List<DetaliiClientView> rezultate = detaliiClientRepository.findByTaraIgnoreCase(tara);
-        if (rezultate.isEmpty()) {
-            throw new ResourceNotFoundException("Nu am gasit clienti in tara: " + tara);
+        List<DetaliiClientView> results = detaliiClientRepository.findByTaraIgnoreCase(tara);
+        if (results.isEmpty()) {
+            throw new ResourceNotFoundException("No clients were found in country:" + tara);
         }
-        return rezultate;
+        return results;
     }
 
     public List<DetaliiClientView> searchByOras(String oras) {
-        List<DetaliiClientView> rezultate = detaliiClientRepository.findByOrasIgnoreCase(oras);
-        if (rezultate.isEmpty()) {
-            throw new ResourceNotFoundException("Nu am gasit clienti in orasul: " + oras);
+        List<DetaliiClientView> results = detaliiClientRepository.findByOrasContainingIgnoreCase(oras);
+        if (results.isEmpty()) {
+            throw new ResourceNotFoundException("No clients were found in city: " + oras);
         }
-        return rezultate;
+        return results;
     }
 
     @Transactional
