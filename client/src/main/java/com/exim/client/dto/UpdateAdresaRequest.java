@@ -11,7 +11,7 @@ public class UpdateAdresaRequest {
     @NotBlank(message = "Strada este obligatorie!")
     private String strada;
 
-    @NotBlank(message = "Numarul este obligatoriu!")
+    @NotNull(message = "Numarul este obligatoriu!")
     private Integer nr;
 
     @NotBlank(message = "Tipul de adresa este obligatoriu!")

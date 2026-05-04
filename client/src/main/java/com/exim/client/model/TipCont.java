@@ -17,7 +17,7 @@ public enum TipCont {
 
     public static TipCont fromString(String tipCont) {
         if (tipCont == null) {
-            throw new IllegalArgumentException("Tipul contului nu poate fi null");
+            throw new IllegalArgumentException("The account type must be provided!");
         }
         String normalized = tipCont.trim();
         for (TipCont tip : TipCont.values()) {
@@ -25,6 +25,6 @@ public enum TipCont {
                 return tip;
             }
         }
-        throw new IllegalArgumentException("Tipul contului necunoscut: " + tipCont);
+        throw new IllegalArgumentException("Unknown account type: " + tipCont);
     }
 }

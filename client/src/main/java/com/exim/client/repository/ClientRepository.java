@@ -19,4 +19,6 @@ public interface ClientRepository extends JpaRepository<Client, Long>{
     List<Client> findByStatus(Boolean status);
     @Query("SELECT MAX(c.codClient) FROM Client c")
     String findMaxCodClient();
+    boolean existsByCnp(String cnp);
+    boolean existsByActId(String actId);
 }

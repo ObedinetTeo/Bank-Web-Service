@@ -5,9 +5,14 @@ import com.exim.client.dto.UpdateClientRequest;
 import com.exim.client.dto.UpdateAdresaRequest;
 import com.exim.client.dto.UpdateContactRequest;
 import com.exim.client.entity.DetaliiClientView;
+import com.exim.client.exception.DuplicateResourceException;
 import com.exim.client.entity.Adresa;
 import com.exim.client.entity.Contact;
+import com.exim.client.repository.ClientRepository;
 import com.exim.client.service.ClientService;
+
+import jakarta.validation.Valid;
+
 import com.exim.client.dto.ClientRequest;
 import com.exim.client.entity.Client;
 
@@ -23,11 +28,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/clients")
 public class ClientController {
 
+    private final ClientRepository clientRepository;
     @Autowired
     private ClientService clientService;
 
-    public ClientController(ClientService clientService) {
+    public ClientController(ClientService clientService, ClientRepository clientRepository) {
         this.clientService = clientService;
+        this.clientRepository = clientRepository;
     }
 
     @GetMapping("/code/{codClient}")
@@ -72,7 +79,11 @@ public class ClientController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Client> addClient(@RequestBody ClientRequest client){
+    public ResponseEntity<Client> addClient(@Valid @RequestBody ClientRequest client){
+        if (clientRepository.existsByCnp(client.getCnp()) || clientRepository.existsByActId(client.getActId()))
+        {
+            throw new DuplicateResourceException("A client with the same CNP or ActId already exists!");
+        }
         Client savedClient = clientService.createNewClient(client);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedClient);
     }
@@ -80,7 +91,7 @@ public class ClientController {
     @DeleteMapping("/delete/{codClient}")
     public ResponseEntity<String> deleteClientLogical(@PathVariable String codClient) {
         clientService.deleteClientLogical(codClient);
-        return ResponseEntity.ok("Clientul " + codClient + " a fost sters logic cu succes");
+        return ResponseEntity.ok("The clients " + codClient + " was successfully logically deleted!");
     }
 
     @PutMapping("/update/{codClient}")
