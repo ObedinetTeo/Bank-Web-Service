@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 @Immutable
 @Table(name = "v_sumar_conturi_client", schema = "exim")
 public class SumarConturiClientView {
-@Id
+    @Id
     @Column(name = "cod_client")
     private String codClient;
 

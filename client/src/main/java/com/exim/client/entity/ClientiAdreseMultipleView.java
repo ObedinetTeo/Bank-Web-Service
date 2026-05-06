@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 @Immutable
 @Table(name = "v_clienti_adrese_multiple", schema = "exim")
 public class ClientiAdreseMultipleView {
-@Id
+    @Id
     @Column(name = "cod_client")
     private String codClient;
 

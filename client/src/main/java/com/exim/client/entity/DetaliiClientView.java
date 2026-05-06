@@ -27,11 +27,17 @@ public class DetaliiClientView {
     @Column(name = "cnp")
     private String cnp;
 
+    @Column(name = "act_id")
+    private String actId;
+
     @Column(name = "email")
     private String email;
 
     @Column(name = "tel_mobil")
     private String telMobil;
+
+    @Column(name = "tara")
+    private String tara;
 
     @Column(name = "oras")
     private String oras;
@@ -39,7 +45,6 @@ public class DetaliiClientView {
     @Column(name = "strada")
     private String strada;
 
-    // Atentie: In SQL ai pus alias-ul "numar_adresa", deci trebuie sa il respectam aici
     @Column(name = "numar_adresa")
     private Long numarAdresa; 
 
@@ -66,6 +71,10 @@ public class DetaliiClientView {
 
     public String getCnp() {
         return cnp;
+    }
+
+    public String getActId() {
+        return actId;
     }
 
     public String getEmail() {

@@ -13,6 +13,6 @@ public interface ContRepository extends JpaRepository<Cont, Long>{
     List<Cont> findByIdClient(Long idClient);
     List<Cont> findByTipCont(TipCont tipCont);
     List<Cont> findByIdClientAndTipCont(Long idClient, TipCont tipCont);
-    List<Cont> findByClientIdAndActiv(Long idClient, boolean stare_cont);
+    List<Cont> findByIdClientAndStareCont(Long idClient, Boolean stareCont);
     boolean existsByIdClient(Long idClient);
 }

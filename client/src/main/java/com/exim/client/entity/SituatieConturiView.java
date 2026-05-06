@@ -8,12 +8,15 @@ import java.time.LocalDate;
 
 import org.hibernate.annotations.Immutable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Immutable
 @Table(name = "v_situatie_conturi", schema = "exim")
 public class SituatieConturiView {
     @Id
     @Column(name = "id_cont")
+    @JsonIgnore
     private Long idCont;
 
     @Column(name = "cod_client")
@@ -25,14 +28,17 @@ public class SituatieConturiView {
     @Column(name = "tip_cont_descriere")
     private String tipContDescriere;
 
-    @Column(name = "stare_cont")
-    private Boolean stareCont;
-
     @Column(name = "data_deschidere")
     private LocalDate dataDeschidere;
 
     @Column(name = "data_inchidere")
     private LocalDate dataInchidere;
+
+    @Column(name = "zile_vechime")
+    private Integer zileVechime; 
+
+    @Column(name = "status_detaliat")
+    private String statusDetaliat;
 
     // --- Default constructor ---
     public SituatieConturiView() {
@@ -54,9 +60,6 @@ public class SituatieConturiView {
     public String getTipContDescriere() {
         return tipContDescriere;
     }
-    public Boolean getStareCont() {
-        return stareCont;
-    }
 
     public LocalDate getDataDeschidere() {
         return dataDeschidere;
@@ -64,5 +67,13 @@ public class SituatieConturiView {
 
     public LocalDate getDataInchidere() {
         return dataInchidere;
+    }
+
+    public Integer getZileVechime() {
+        return zileVechime;
+    }
+
+    public String getStatusDetaliat() {
+        return statusDetaliat;
     }
 }

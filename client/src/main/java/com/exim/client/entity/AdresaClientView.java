@@ -3,6 +3,7 @@ package com.exim.client.entity;
 import org.hibernate.annotations.Immutable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -19,6 +20,9 @@ public class AdresaClientView {
 
     @Column(name = "cod_client")
     private String codClient;
+
+    @Column(name = "tara")
+    private String tara;
 
     @Column(name = "oras")
     private String oras;
@@ -46,6 +50,10 @@ public class AdresaClientView {
 
     public String getCodClient() {
         return codClient;
+    }
+
+    public String getTara() {
+        return tara;
     }
 
     public String getOras() {
