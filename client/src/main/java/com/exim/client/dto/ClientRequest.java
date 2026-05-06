@@ -4,30 +4,30 @@ import jakarta.validation.Valid;
 
 
 public class ClientRequest {
-    @NotBlank(message = "Numele este obligatoriu!")
-    @Size(min = 2, max = 30, message = "Numele trebuie sa aiba intre 2 si 30 de caractere!")
-    @Pattern(regexp = "^[a-zA-Z\\s-]+$", message = "Numele poate contine doar litere si cratime!")
+    @NotBlank(message = "The last name is mandatory!")
+    @Size(min = 2, max = 30, message = "The last name must have between 2 and 30 characters!")
+    @Pattern(regexp = "^[a-zA-Z\\s-]+$", message = "The last name can only contain letters and hyphens!")
     private String nume;
 
-    @NotBlank(message = "Prenumele este obligatoriu!")
-    @Size(min = 2, max = 50, message = "Prenumele trebuie sa aiba intre 2 si 50 de caractere!")
-    @Pattern(regexp = "^[a-zA-Z\\s-]+$", message = "Prenumele poate contine doar litere si cratime!")
+    @NotBlank(message = "The first name is mandatory!")
+    @Size(min = 2, max = 50, message = "The first name must have between 2 and 50 characters!")
+    @Pattern(regexp = "^[a-zA-Z\\s-]+$", message = "The first name can only contain letters and hyphens!")
     private String prenume;
 
-    @Pattern(regexp = "^[0-9]{13}$", message = "CNP-ul trebuie sa aiba exact 13 cifre!")
+    @Pattern(regexp = "^[0-9]{13}$", message = "The CNP must have exactly 13 digits!")
     private String cnp;
 
-    @NotBlank(message = "Actul de identitate este obligatoriu!")
-    @Size(min = 2, max = 50, message = "Actul de identitate trebuie sa aiba intre 2 si 50 de caractere!")
-    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Actul de identitate poate contine doar numere si litere!")
+    @NotBlank(message = "The identity document is mandatory!")
+    @Size(min = 2, max = 50, message = "The identity document must have between 2 and 50 characters!")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "The identity document can only contain letters and numbers!")
     private String actId;
 
     @Valid
-    @NotNull(message = "Datele adresei sunt obligatorii!")
+    @NotNull(message = "The address details are mandatory!")
     private AdresaRequest adresa;
 
     @Valid
-    @NotNull(message = "Datele de contact sunt obligatorii!")
+    @NotNull(message = "The contact details are mandatory!")
     private ContactRequest contact;
 
     public String getNume() { return nume; }

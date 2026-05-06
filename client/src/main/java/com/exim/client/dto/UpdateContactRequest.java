@@ -2,11 +2,11 @@ package com.exim.client.dto;
 import jakarta.validation.constraints.*;
 
 public class UpdateContactRequest {
-    @Pattern(regexp = "^[0-9]{10,15}$", message = "Numariul de telefon trebuie sa aiba inre 10 si 15 cifre!")
-    @NotBlank(message = "Telefonul nu poate fi gol!")
+    @Pattern(regexp = "^[0-9]{10,15}$", message = "The phone number must have between 10 and 15 digits!")
+    @NotBlank(message = "The phone number is mandatory!")
     private String telefon;
 
-    @NotBlank(message = "Email-ul nu poate fi gol!")
+    @NotBlank(message = "The email is mandatory!")
     private String email;
     
     private Boolean status;

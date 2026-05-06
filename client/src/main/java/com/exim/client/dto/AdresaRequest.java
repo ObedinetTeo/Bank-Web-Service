@@ -2,19 +2,19 @@ package com.exim.client.dto;
 import jakarta.validation.constraints.*;
 
 public class AdresaRequest {
-    @NotBlank(message = "Tara este obligatorie!")
+    @NotBlank(message = "Country is mandatory!")
     private String tara;
 
-    @NotBlank(message = "Orasul este obligatoriu!")
+    @NotBlank(message = "City is mandatory!")
     private String oras;
 
-    @NotBlank(message = "Strada este obligatorie!")
+    @NotBlank(message = "Street is mandatory!")
     private String strada;
 
-    @NotNull(message = "Numarul este obligatoriu!")
+    @NotNull(message = "The number is mandatory!")
     private Integer nr;
 
-    @NotBlank(message = "Tipul de adresa este obligatoriu!")
+    @NotBlank(message = "The type of address is mandatory!")
     private String tipAdresa;
 
     public String getTara() { return tara; }

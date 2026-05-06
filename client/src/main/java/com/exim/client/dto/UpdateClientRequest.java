@@ -2,14 +2,14 @@ package com.exim.client.dto;
 import jakarta.validation.constraints.*;
 
 public class UpdateClientRequest {
-    @NotBlank(message = "Numele este obligatoriu!")
-    @Size(min = 2, max = 30, message = "Numele trebuie sa aiba intre 2 si 30 de caractere!")
-    @Pattern(regexp = "^[a-zA-Z\\s-]+$", message = "Numele poate contine doar litere si cratime!")
+    @NotBlank(message = "The last name is mandatory!")
+    @Size(min = 2, max = 30, message = "The last name must have between 2 and 30 characters!")
+    @Pattern(regexp = "^[a-zA-Z\\s-]+$", message = "The last name can only contain letters and hyphens!")
     private String nume;
 
-    @NotBlank(message = "Prenumele este obligatoriu!")
-    @Size(min = 2, max = 50, message = "Prenumele trebuie sa aiba intre 2 si 50 de caractere!")
-    @Pattern(regexp = "^[a-zA-Z\\s-]+$", message = "Prenumele poate contine doar litere si cratime!")
+    @NotBlank(message = "The first name is mandatory!")
+    @Size(min = 2, max = 50, message = "The first name must have between 2 and 50 characters!")
+    @Pattern(regexp = "^[a-zA-Z\\s-]+$", message = "The first name can only contain letters and hyphens!")
     private String prenume;
     
     private Boolean status;
